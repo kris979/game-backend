@@ -97,6 +97,10 @@ public class Cell implements Comparable<Cell>{
 		return true;
 	}
 
+	public boolean equalsXY(Cell other) {
+		return x == other.getX() && y == other.getY();
+	}
+	
 	@Override
 	public int compareTo(Cell o) {
 		if (distance > o.getDistance()) {

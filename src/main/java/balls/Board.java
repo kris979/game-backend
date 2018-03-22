@@ -9,17 +9,16 @@ public class Board {
 	
 	private Queue<Cell> walls = new LinkedList<Cell>();
 	private Queue<Cell> paths = new LinkedList<Cell>();
-	private Queue<Cell> workingQueue = new LinkedList<Cell>();
 	private int size;
 
 
 	public Board(int size) {
 		super();
 		this.size = size;
-		createWalls();
+		addFrameToWallsSoThatWeDontEscapeFromTheBoard();
 	}
 	
-	private void createWalls() {
+	private void addFrameToWallsSoThatWeDontEscapeFromTheBoard() {
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
 				Cell c = new Cell(i, j);
@@ -31,7 +30,7 @@ public class Board {
 	}
 
 	private boolean isWall(Cell cell) {
-		return walls.stream().anyMatch(c -> c.getX() == cell.getX() && c.getY() == cell.getY());
+		return walls.stream().anyMatch(c -> c.equalsXY(cell));
 	}
 
 	public void addWall(int x, int y) {
@@ -44,12 +43,13 @@ public class Board {
 	}
 
 	public boolean isAlreadyInPath(Cell cell) {
-		return paths.stream().anyMatch(c -> c.getX() == cell.getX() && c.getY() == cell.getY() && c.getDistance() <= cell.getDistance());
+		return paths.stream().anyMatch(c -> c.equalsXY(cell) && c.getDistance() <= cell.getDistance());
 	}
 
 	public List<Cell> findPaths(Cell start, Cell end) {
 		
-		end.setDistance(0);		
+		Queue<Cell> workingQueue = new LinkedList<Cell>();
+		
 		paths.offer(end);
 		workingQueue.offer(end);
 		
@@ -69,8 +69,8 @@ public class Board {
 				paths.offer(cell);
 			}
 			
-			if (cell.getX() == start.getX() && cell.getY() == start.getY()) {
-				break;
+			if (cell.equalsXY(start)) {
+				break; //done!
 			}
 		}
 		
@@ -82,20 +82,22 @@ public class Board {
 		List<Cell> path = new LinkedList<>();
 		
 		Cell last = null; 
+		
 		for (Cell cell : findPaths(start, end)) {
+			
 			if (last == null) {
-				path.add(cell);
-				last = cell;
-			} else if (cell.getDistance() < last.getDistance() && cell.isAdjacentTo(last)) {
+				if (cell.equalsXY(start)) {
+					path.add(cell);
+					last = cell;
+				}
+			} else if (cell.getDistance() == last.getDistance()-1 && cell.isAdjacentTo(last)) {
 				path.add(cell);
 				last = cell;
 			}
 			
-			if (last.getX() == end.getX() && last.getY() == end.getY())
-				break;
-			
+			if (last != null && last.equalsXY(end))
+				break; //done
 		}
-		
 		return path; 
 	}
 	
