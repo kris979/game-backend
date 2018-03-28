@@ -74,6 +74,7 @@ public class BaordTest {
 		Cell start = new Cell(1, 1, 4);
 		Cell end = new Cell(1, 5, 0);
 		List<Cell> paths = tested.findPaths(start,end);
+		System.out.println(paths);
 		assertThat(paths, hasItem(start));
 		assertThat(paths, hasItem(new Cell(1,2,3)));
 		assertThat(paths, hasItem(new Cell(1,3,2)));
