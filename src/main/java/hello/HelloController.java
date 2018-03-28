@@ -1,4 +1,4 @@
-package controllers;
+package hello;
 
 import org.springframework.web.bind.annotation.RestController;
 
