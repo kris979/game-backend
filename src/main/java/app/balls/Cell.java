@@ -1,4 +1,4 @@
-package balls;
+package app.balls;
 
 import java.util.LinkedList;
 import java.util.Queue;

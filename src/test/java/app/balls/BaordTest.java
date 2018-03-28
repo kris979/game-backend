@@ -1,4 +1,4 @@
-package balls;
+package app.balls;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

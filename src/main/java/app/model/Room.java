@@ -1,4 +1,4 @@
-package hello;
+package app.model;
 
 public class Room {
     private long id;
