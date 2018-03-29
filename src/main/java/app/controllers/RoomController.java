@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.services.RoomServices;
 
+/**
+ * This is serving static index.html page
+ * 
+ * @author kris9
+ *
+ */
 @Controller
 @RequestMapping("/rooms")
 public class RoomController {
@@ -19,6 +25,10 @@ public class RoomController {
         this.roomServices = roomServices;
     }
 
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping
     public String getAllRooms(Model model){
         model.addAttribute("rooms", this.roomServices.getAllRooms());
