@@ -1,11 +1,9 @@
-package app.balls;
+package app.model;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
-
-import app.model.Cell;
 
 public class Board {
 	

@@ -1,4 +1,4 @@
-package app.balls;
+package app.model;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -9,6 +9,7 @@ import java.util.Queue;
 
 import org.junit.Test;
 
+import app.model.Board;
 import app.model.Cell;
 
 /*
