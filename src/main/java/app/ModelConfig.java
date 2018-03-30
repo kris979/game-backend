@@ -8,6 +8,9 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("classpath:/application.properties")
 public class ModelConfig {
+
+	@Value("#{new Boolean(\"${profile.active}\"==\"dev\")}")
+	private Boolean isDev;
 	
 	@Value("${board.size}")
 	private Integer boardSize;
