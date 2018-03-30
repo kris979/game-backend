@@ -21,9 +21,4 @@ public class SwaggerConfig {
           .build();                                           
     }
     
-    @Bean
-    public Integer size() {
-    	return 10;
-    }
-    
 }

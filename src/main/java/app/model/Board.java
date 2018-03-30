@@ -5,17 +5,13 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-@Component
 public class Board {
 	
 	private Queue<Cell> walls = new LinkedList<Cell>();
 	private Queue<Cell> paths = new LinkedList<Cell>();
 	private int size;
 
-	@Autowired
+
 	public Board(int size) {
 		super();
 		this.size = size;
