@@ -21,9 +21,4 @@ public class SwaggerConfig {
           .paths(PathSelectors.any())                          
           .build();                                           
     }
-    
-    @Bean
-    public Integer size() {
-    	return 10;
-    }
 }
