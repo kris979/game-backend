@@ -3,13 +3,19 @@ package app.model;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Cell implements Comparable<Cell>{
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//public class Cell implements Comparable<Cell>{
+public class Cell {
 	
 	private int x;
 	private int y;
 	private int distance = 0;
-	
-	
+
+	public Cell() {
+		super();
+	}
+
 	public Cell(int x, int y) {
 		super();
 		this.x = x;
@@ -23,6 +29,25 @@ public class Cell implements Comparable<Cell>{
 		this.distance = distance;
 	}
 
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	public int getDistance() {
+		return distance;
+	}
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	
 	@Override
 	public String toString() {
 		return "(" + x + "," + y + "," + distance + ")";
@@ -32,27 +57,7 @@ public class Cell implements Comparable<Cell>{
 		return x == 0 || y == 0 || x >= 9 || y >= 9;
 	}
 
-	
-	public int getDistance() {
-		return distance;
-	}
-
-
-	public void setDistance(int distance) {
-		this.distance = distance;
-	}
-
-
-	public int getX() {
-		return x;
-	}
-
-
-	public int getY() {
-		return y;
-	}
-
-
+	@JsonIgnore
 	public Queue<Cell> getAdjacent() {
 		Queue<Cell> adjacentCells = new LinkedList<>();
 		int newDistance = distance + 1;
@@ -101,17 +106,18 @@ public class Cell implements Comparable<Cell>{
 		return x == other.getX() && y == other.getY();
 	}
 	
-	@Override
-	public int compareTo(Cell o) {
-		if (distance > o.getDistance()) {
-			return -1;
-		} else if (distance == o.getDistance()) {
-			return 0;
-		} else {
-			return 1;
-		}
-	}
+//	@Override
+//	public int compareTo(Cell o) {
+//		if (distance > o.getDistance()) {
+//			return -1;
+//		} else if (distance == o.getDistance()) {
+//			return 0;
+//		} else {
+//			return 1;
+//		}
+//	}
 
+	@JsonIgnore
 	public boolean isAdjacentTo(Cell last) {
 		if (x == last.getX()-1 && y == last.getY()) {
 			return true;
