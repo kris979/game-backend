@@ -5,8 +5,7 @@ import java.util.Queue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-//public class Cell implements Comparable<Cell>{
-public class Cell {
+public class Cell implements Comparable<Cell> {
 	
 	private int x;
 	private int y;
@@ -106,16 +105,16 @@ public class Cell {
 		return x == other.getX() && y == other.getY();
 	}
 	
-//	@Override
-//	public int compareTo(Cell o) {
-//		if (distance > o.getDistance()) {
-//			return -1;
-//		} else if (distance == o.getDistance()) {
-//			return 0;
-//		} else {
-//			return 1;
-//		}
-//	}
+	@Override
+	public int compareTo(Cell o) {
+		if (distance > o.getDistance()) {
+			return -1;
+		} else if (distance == o.getDistance()) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
 
 	@JsonIgnore
 	public boolean isAdjacentTo(Cell last) {

@@ -14,6 +14,8 @@ public class Board {
 	private Queue<Cell> walls = new LinkedList<Cell>();
 	private Queue<Cell> paths = new LinkedList<Cell>();
 	private int size;
+	private Cell start;
+	private Cell end;
 
 	@Autowired
 	public Board(int size) {
@@ -33,7 +35,23 @@ public class Board {
 		}
 	}
 
-	private boolean isWall(Cell cell) {
+	public Cell getStart() {
+		return start;
+	}
+
+	public void setStart(Cell start) {
+		this.start = start;
+	}
+
+	public Cell getEnd() {
+		return end;
+	}
+
+	public void setEnd(Cell end) {
+		this.end = end;
+	}
+	
+	public boolean isWall(Cell cell) {
 		return walls.stream().anyMatch(c -> c.equalsXY(cell));
 	}
 
@@ -50,7 +68,7 @@ public class Board {
 		return paths.stream().anyMatch(c -> c.equalsXY(cell) && c.getDistance() <= cell.getDistance());
 	}
 
-	public List<Cell> findPaths(Cell start, Cell end) {
+	public List<Cell> findPaths() {
 		
 		Queue<Cell> workingQueue = new LinkedList<Cell>();
 		
@@ -81,13 +99,13 @@ public class Board {
 		return paths.stream().sorted().collect(Collectors.toList());
 	}
 
-	public List<Cell> getShortestPath(Cell start, Cell end) {
+	public List<Cell> getShortestPath() {
 		
 		List<Cell> path = new LinkedList<>();
 		
 		Cell last = null; 
 		
-		for (Cell cell : findPaths(start, end)) {
+		for (Cell cell : findPaths()) {
 			
 			if (last == null) {
 				if (cell.equalsXY(start)) {
@@ -104,7 +122,5 @@ public class Board {
 		}
 		return path; 
 	}
-	
-	
 
 }

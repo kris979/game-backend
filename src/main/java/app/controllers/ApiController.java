@@ -4,8 +4,10 @@ import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Cell;
@@ -41,6 +43,17 @@ public class ApiController {
     public Queue<Cell> walls() {
 		return boardServices.getWalls();
     }
+	
+	@RequestMapping(value = "/board/start", method = RequestMethod.PUT)
+    public void setStart(@RequestBody Cell start) {
+		boardServices.setStart(start);
+    }
+	
+	@RequestMapping(value = "/board/end", method = RequestMethod.PUT)
+    public void setEnd(@RequestBody Cell end) {
+		boardServices.setEnd(end);
+    }
+	
 	
     //localhost:8080/swagger-ui.html
 //    http://localhost:8080/v2/api-docs

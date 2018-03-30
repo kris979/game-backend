@@ -76,7 +76,9 @@ public class BaordTest {
 		Board tested = new Board(10);
 		Cell start = new Cell(1, 1, 4);
 		Cell end = new Cell(1, 5, 0);
-		List<Cell> paths = tested.findPaths(start,end);
+		tested.setStart(start);
+		tested.setEnd(end);
+		List<Cell> paths = tested.findPaths();
 		System.out.println(paths);
 		assertThat(paths, hasItem(start));
 		assertThat(paths, hasItem(new Cell(1,2,3)));
@@ -88,13 +90,14 @@ public class BaordTest {
 	@Test
 	public void testFindShortestPaths() {
 
+		Cell end = new Cell(3, 1);
+		Cell start = new Cell(1, 1);
 		Board tested = new Board(10);
-		
+		tested.setStart(start);
+		tested.setEnd(end);
 		tested.addWall(2,1);
 		
-		Cell start = new Cell(1, 1);
-		Cell end = new Cell(3, 1);
-		List<Cell> shortestPath = tested.getShortestPath(start, end);
+		List<Cell> shortestPath = tested.getShortestPath();
 	/*	
 		    0 1 2 3 4 5 6 7 8 9
 		  0 x x x x x x x x x x
@@ -119,14 +122,15 @@ public class BaordTest {
 	@Test
 	public void testFindShortestPaths1() {
 		
+		Cell start = new Cell(1, 1);
+		Cell end = new Cell(1, 5);
 		Board tested = new Board(10);
-		
+		tested.setStart(start);
+		tested.setEnd(end);
 		tested.addWall(3,4);
 		tested.addWall(1,4);
 		
-		Cell start = new Cell(1, 1);
-		Cell end = new Cell(1, 5);
-		List<Cell> paths = tested.getShortestPath(start,end);
+		List<Cell> paths = tested.getShortestPath();
 		assertThat(paths, hasSize(7));
 		assertThat(paths, hasItem(new Cell(1,1,6)));
 		assertThat(paths, hasItem(new Cell(1,2,5)));

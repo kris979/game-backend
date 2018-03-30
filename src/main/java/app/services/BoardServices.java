@@ -27,4 +27,16 @@ public class BoardServices {
 		return board.getWalls();
 	}
 
+	public void addStart(Cell start) {
+		board.setStart(start);
+	}
+	
+	public void setStart(Cell start) {
+		board.setStart(start);
+	}
+	
+	public void setEnd(Cell end) {
+		board.setEnd(end);
+	}
+	
 }
