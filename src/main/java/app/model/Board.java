@@ -101,6 +101,10 @@ public class Board {
 
 	public List<Cell> getShortestPath() {
 		
+		if (this.start == null || this.end == null) {
+			useDefaults();
+		}
+		
 		List<Cell> path = new LinkedList<>();
 		
 		Cell last = null; 
@@ -121,6 +125,11 @@ public class Board {
 				break; //done
 		}
 		return path; 
+	}
+
+	private void useDefaults() {
+		this.start = new Cell(1,1,0);
+		this.end = new Cell (1,5,0);
 	}
 
 }

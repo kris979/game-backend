@@ -1,5 +1,6 @@
 package app.services;
 
+import java.util.List;
 import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,10 @@ public class BoardServices {
 	
 	public void setEnd(Cell end) {
 		board.setEnd(end);
+	}
+
+	public List<Cell> findShortestPath() {
+		return board.getShortestPath();
 	}
 	
 }

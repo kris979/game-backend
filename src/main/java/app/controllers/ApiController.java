@@ -39,6 +39,11 @@ public class ApiController {
         return "Cards";
     }
     
+    @GetMapping("/board/shortestPath")
+    public List<Cell> findShortestPath(){
+        return this.boardServices.findShortestPath();
+    }
+    
 	@RequestMapping(value = "/board/walls", method = RequestMethod.GET)
     public Queue<Cell> walls() {
 		return boardServices.getWalls();
