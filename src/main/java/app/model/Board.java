@@ -132,4 +132,8 @@ public class Board {
 		this.end = new Cell (1,5,0);
 	}
 
+	public Object getBoard() {
+		return null;
+	}
+
 }
