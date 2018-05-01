@@ -1,12 +1,14 @@
 package app;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,20 +20,52 @@ import app.model.Cell;
 
 public class UI extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private enum Selection {
 		START, END, WALLS
 	}
 
 	private Selection selectedButton = Selection.WALLS;
-	private Board board = new Board(10);
+	private Board board = new Board(11);
 	private JPanel topPanel = new JPanel(new GridLayout(1, 3));
 	private JPanel centerPanel = new JPanel(new GridLayout(10, 10));
 	private JPanel bottomPanel = new JPanel(new GridLayout(1, 1));
+	private List<JButton> cells = new ArrayList<>();
+
+	public UI() throws HeadlessException {
+		super();
+
+		addRadioButtonToTopPanel();
+		add(topPanel, BorderLayout.NORTH);
+
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				JButton b = new JButton(Integer.toString(i) + "," + Integer.toString(j));
+				b.addActionListener(this);
+				cells.add(b);
+				centerPanel.add(b);
+			}
+		}
+		add(centerPanel, BorderLayout.CENTER);
+
+		JButton go = new JButton("Go!");
+		go.addActionListener(this);
+		bottomPanel.add(go);
+		add(bottomPanel, BorderLayout.SOUTH);
+
+		setSize(1000, 1000);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// pack();
+		setVisible(true);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
-		System.out.println(actionCommand);
 		switch (actionCommand) {
 		case "Add Start": {
 			selectedButton = Selection.START;
@@ -49,28 +83,65 @@ public class UI extends JFrame implements ActionListener {
 		}
 			break;
 		case "Go!": {
-			System.out.println("Go!!!");
+			clearBoard();
+			List<Cell> shortestPath = board.getShortestPath();
+			drawShortestPath(shortestPath);
 		}
 			break;
 		default: {
-			markCell((JButton) e.getSource());
+			JButton thatWasClicked = (JButton) e.getSource();
+			markCell(thatWasClicked);
 		}
 			break;
 
 		}
 	}
 
-	private void markCell(JButton cell) {
+	private void drawShortestPath(List<Cell> shortestPath) {
+		for (Cell cell : shortestPath) {
+			int tens = cell.getX();
+			int ones = cell.getY();
+			int index = 10 * tens + 1 * ones;
+			JButton uiCell = cells.get(index);
+			if (!(uiCell.getText().equals("START") || uiCell.getText().equals("END"))) {
+				uiCell.setText(Integer.toString(cell.getDistance()));
+			}
+		}
+	}
+
+	private void clearBoard() {
+		for (JButton jButton : cells) {
+			if (!(jButton.getText().equals("START") || jButton.getText().equals("END")
+					|| jButton.getText().equals("X"))) {
+				jButton.setText("");
+			}
+		}
+	}
+
+	private void markCell(JButton buttonCell) {
+		String[] split = buttonCell.getText().split(",");
+		int x = Integer.parseInt(split[0]);
+		int y = Integer.parseInt(split[1]);
+		Cell cell = new Cell(x, y);
 		switch (selectedButton) {
 		case START: {
-			cell.setText("S");
-		} break;
+			board.setStart(cell);
+			buttonCell.setText("START");
+			buttonCell.setBackground(Color.GREEN);
+		}
+			break;
 		case END: {
-			cell.setText("E");
-		} break;
+			board.setEnd(cell);
+			buttonCell.setText("END");
+			buttonCell.setBackground(Color.YELLOW);
+		}
+			break;
 		case WALLS: {
-			cell.setText("X");
-		} break;
+			board.addWall(x, y);
+			buttonCell.setText("WALL");
+			buttonCell.setBackground(Color.RED);
+		}
+			break;
 		default:
 			break;
 		}
@@ -84,30 +155,6 @@ public class UI extends JFrame implements ActionListener {
 				button.setSelected(false);
 			}
 		}
-	}
-
-	public UI() throws HeadlessException {
-		super();
-
-		addRadioButtonToTopPanel();
-		add(topPanel, BorderLayout.NORTH);
-
-		for (int i = 0; i < 100; i++) {
-			JButton b = new JButton(Integer.toString(i));
-			b.addActionListener(this);
-			centerPanel.add(b);
-		}
-		add(centerPanel, BorderLayout.CENTER);
-
-		JButton go = new JButton("Go!");
-		go.addActionListener(this);
-		bottomPanel.add(go);
-		add(bottomPanel, BorderLayout.SOUTH);
-
-		setSize(1000, 1000);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pack();
-		setVisible(true);
 	}
 
 	private void addRadioButtonToTopPanel() {
