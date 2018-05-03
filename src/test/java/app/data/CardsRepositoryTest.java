@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +29,19 @@ public class CardsRepositoryTest {
 		assertThat(minions, is(notNullValue()));
 		assertThat(minions.size(), is(greaterThan(100)));
 	}
+	
+	@Test
+	public void testHeros() {
+		List<Card> minions = repository.getHeros();
+		assertThat(minions, is(notNullValue()));
+		assertThat(minions.size(), is(greaterThan(0)));
+	}
 
+	@Test
+	public void testSpells() {
+		List<Card> minions = repository.getSpells();
+		assertThat(minions, is(notNullValue()));
+		assertThat(minions.size(), is(greaterThan(0)));
+	}
+	
 }

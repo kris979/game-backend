@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.data.CardsRepository;
+import app.model.Card;
 import app.services.BoardServices;
 import app.shortestPath.Cell;
 
@@ -17,11 +19,13 @@ import app.shortestPath.Cell;
 public class ApiController {
 
     private BoardServices boardServices;
+    private CardsRepository cardRepository;
 
     @Autowired
-    public ApiController(BoardServices boardServices){
+    public ApiController(BoardServices boardServices,CardsRepository cardRepository){
         super();
         this.boardServices = boardServices;
+        this.cardRepository = cardRepository;
     }
 
     @GetMapping("/test")
@@ -49,6 +53,30 @@ public class ApiController {
 		boardServices.setEnd(end);
     }
 	
+	@RequestMapping(value = "/hearthstone/heros", method = RequestMethod.GET)
+    public List<Card> heros() {
+		return cardRepository.getHeros();
+    }
+	
+	@RequestMapping(value = "/hearthstone/minions", method = RequestMethod.GET)
+    public List<Card> minions() {
+		return cardRepository.getMinions();
+    }
+	
+	@RequestMapping(value = "/hearthstone/minions/dragons", method = RequestMethod.GET)
+    public List<Card> dragons() {
+		return cardRepository.getDragons();
+    }
+	
+	@RequestMapping(value = "/hearthstone/spells", method = RequestMethod.GET)
+    public List<Card> spells() {
+		return cardRepository.getSpells();
+    }
+	
+	@RequestMapping(value = "/hearthstone/heroPowers", method = RequestMethod.GET)
+    public List<Card> heroPowers() {
+		return cardRepository.getHeroPowers();
+    }
 	
     //localhost:8080/swagger-ui.html
 //    http://localhost:8080/v2/api-docs
