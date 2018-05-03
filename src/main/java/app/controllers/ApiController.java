@@ -10,32 +10,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Cell;
-import app.model.Room;
 import app.services.BoardServices;
-import app.services.RoomServices;
 
 @RestController
 @RequestMapping("/api")
 public class ApiController {
 
-    private RoomServices roomServices;
     private BoardServices boardServices;
 
     @Autowired
-    public ApiController(RoomServices roomServices, BoardServices boardServices){
+    public ApiController(BoardServices boardServices){
         super();
-        this.roomServices = roomServices;
         this.boardServices = boardServices;
     }
 
-    @GetMapping("/rooms")
-    public List<Room> getAllRooms(){
-        return this.roomServices.getAllRooms();
-    }
-    
-	@RequestMapping(value = "/cards", method = RequestMethod.GET)
-    public String index() {
-        return "Cards";
+    @GetMapping("/test")
+    public String test(){
+        return "OK";
     }
     
     @GetMapping("/board/shortestPath")
