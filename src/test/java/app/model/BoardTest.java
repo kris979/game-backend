@@ -42,7 +42,7 @@ import app.shortestPath.Cell;
 
 
 */
-public class BaordTest {
+public class BoardTest {
 	
 	@Test
 	public void testBoard() {
