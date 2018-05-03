@@ -6,10 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:/application.properties")
-public class ModelConfig {
-
-	@Value("#{new Boolean(\"${profile.active}\"==\"dev\")}")
-	private Boolean isDev;
+@PropertySource("classpath:/shortestpath.properties")
+public class ShortestPathConfig {
 	
+	@Value("${board.size}")
+	private Integer boardSize;
+
+    @Bean
+    public Integer size() {
+    	return boardSize;
+    }
 }

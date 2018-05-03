@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({ModelConfig.class, SwaggerConfig.class})
+@Import({ShortestPathConfig.class, ModelConfig.class, SwaggerConfig.class})
 public class Config {
 
 }
