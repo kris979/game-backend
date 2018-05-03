@@ -74,7 +74,7 @@ private String targetingArrowText;
 @JsonProperty("text")
 private String text;
 @JsonProperty("type")
-private String type;
+private CardType type; //HERO, MINION, SPELL, ENCHANTMENT (buff), WEAPON and HERO_POWER
 
 /**
 * No args constructor for use in serialization
@@ -101,7 +101,7 @@ public Card() {
 * @param artist
 * @param attack
 */
-public Card(String howToEarn, String howToEarnGolden, String collectionText, String artist, Integer attack, Integer spellDamage, String cardClass, Boolean collectible, Integer overload, Integer cost, Integer dbfId, Integer durability, Boolean elite, String flavor, Integer health, String id, List<String> mechanics, String name, PlayRequirements playRequirements,String race, String rarity, List<String> referencedTags, String set, String targetingArrowText, String text, String type) {
+public Card(String howToEarn, String howToEarnGolden, String collectionText, String artist, Integer attack, Integer spellDamage, String cardClass, Boolean collectible, Integer overload, Integer cost, Integer dbfId, Integer durability, Boolean elite, String flavor, Integer health, String id, List<String> mechanics, String name, PlayRequirements playRequirements,String race, String rarity, List<String> referencedTags, String set, String targetingArrowText, String text, CardType type) {
 super();
 this.howToEarn = howToEarn;
 this.howToEarnGolden = howToEarnGolden;
@@ -385,12 +385,12 @@ this.text = text;
 }
 
 @JsonProperty("type")
-public String getType() {
+public CardType getType() {
 return type;
 }
 
 @JsonProperty("type")
-public void setType(String type) {
+public void setType(CardType type) {
 this.type = type;
 }
 

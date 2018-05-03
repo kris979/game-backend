@@ -7,6 +7,9 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.*;
 import java.io.IOException;
 import java.util.List;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toSet;
 
 import org.junit.Test;
 
@@ -17,7 +20,7 @@ import app.hearthstone.parsers.CardParser;
 import app.model.Card;
 
 public class CardParserTest {
-
+	
 	@Test
 	public void testParse() throws JsonParseException, JsonMappingException, IOException {
 		CardParser parser = new CardParser();
