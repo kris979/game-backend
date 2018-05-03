@@ -1,4 +1,4 @@
-package app.model;
+package app.shortestPath;
 
 import java.util.LinkedList;
 import java.util.Queue;

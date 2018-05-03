@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.model.Cell;
 import app.services.BoardServices;
+import app.shortestPath.Cell;
 
 @RestController
 @RequestMapping("/api")

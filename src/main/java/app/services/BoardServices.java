@@ -6,8 +6,8 @@ import java.util.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.model.Board;
-import app.model.Cell;
+import app.shortestPath.Board;
+import app.shortestPath.Cell;
 
 @Service
 public class BoardServices {

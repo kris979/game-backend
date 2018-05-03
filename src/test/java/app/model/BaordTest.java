@@ -9,8 +9,8 @@ import java.util.Queue;
 
 import org.junit.Test;
 
-import app.model.Board;
-import app.model.Cell;
+import app.shortestPath.Board;
+import app.shortestPath.Cell;
 
 /*
 

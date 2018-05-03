@@ -15,8 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import app.model.Board;
-import app.model.Cell;
+import app.shortestPath.Board;
+import app.shortestPath.Cell;
 
 public class UI extends JFrame implements ActionListener {
 
