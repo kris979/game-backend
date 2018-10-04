@@ -2,6 +2,8 @@ package app.controllers;
 import java.util.List;
 import java.util.Queue;
 
+import app.data.Student;
+import app.data.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,12 +22,20 @@ public class ApiController {
 
     private BoardServices boardServices;
     private CardsRepository cardRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
-    public ApiController(BoardServices boardServices,CardsRepository cardRepository){
+    public ApiController(BoardServices boardServices, CardsRepository cardRepository, StudentRepository studentRepository){
         super();
         this.boardServices = boardServices;
         this.cardRepository = cardRepository;
+        this.studentRepository = studentRepository;
+
+        this.studentRepository.save(new Student("kris", "123"));
+        this.studentRepository.save(new Student("aga", "1233"));
+        Iterable<Student> all = this.studentRepository.findAll();
+
+        all.forEach(student -> System.out.println(student));
     }
 
     @GetMapping("/test")
