@@ -2,8 +2,9 @@ package app.controllers;
 import java.util.List;
 import java.util.Queue;
 
-import app.data.Student;
+import app.model.Student;
 import app.data.StudentRepository;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,72 +23,65 @@ public class ApiController {
 
     private BoardServices boardServices;
     private CardsRepository cardRepository;
-    private StudentRepository studentRepository;
 
     @Autowired
-    public ApiController(BoardServices boardServices, CardsRepository cardRepository, StudentRepository studentRepository){
+    public ApiController(BoardServices boardServices, CardsRepository cardRepository){
         super();
         this.boardServices = boardServices;
         this.cardRepository = cardRepository;
-        this.studentRepository = studentRepository;
-
-        this.studentRepository.save(new Student("kris", "123"));
-        this.studentRepository.save(new Student("aga", "1233"));
-        Iterable<Student> all = this.studentRepository.findAll();
-
-        all.forEach(student -> System.out.println(student));
     }
 
     @GetMapping("/test")
     public String test(){
         return "OK";
     }
-    
+
     @GetMapping("/board/shortestPath")
     public List<Cell> findShortestPath(){
         return this.boardServices.findShortestPath();
     }
-    
+
 	@RequestMapping(value = "/board/walls", method = RequestMethod.GET)
     public Queue<Cell> walls() {
 		return boardServices.getWalls();
     }
-	
+
 	@RequestMapping(value = "/board/start", method = RequestMethod.PUT)
     public void setStart(@RequestBody Cell start) {
 		boardServices.setStart(start);
     }
-	
+
 	@RequestMapping(value = "/board/end", method = RequestMethod.PUT)
     public void setEnd(@RequestBody Cell end) {
 		boardServices.setEnd(end);
     }
-	
+
 	@RequestMapping(value = "/hearthstone/heros", method = RequestMethod.GET)
     public List<Card> heros() {
 		return cardRepository.getHeros();
     }
-	
+
 	@RequestMapping(value = "/hearthstone/minions", method = RequestMethod.GET)
     public List<Card> minions() {
 		return cardRepository.getMinions();
     }
-	
+
 	@RequestMapping(value = "/hearthstone/minions/dragons", method = RequestMethod.GET)
     public List<Card> dragons() {
 		return cardRepository.getDragons();
     }
-	
+
 	@RequestMapping(value = "/hearthstone/spells", method = RequestMethod.GET)
     public List<Card> spells() {
 		return cardRepository.getSpells();
     }
-	
-	@RequestMapping(value = "/hearthstone/heroPowers", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/hearthstone/heroPowers", method = RequestMethod.GET)
     public List<Card> heroPowers() {
-		return cardRepository.getHeroPowers();
+        return cardRepository.getHeroPowers();
     }
-	
+
+
     //localhost:8080/swagger-ui.html
 //    http://localhost:8080/v2/api-docs
 //    http://localhost:8080/swagger-ui.html#/
