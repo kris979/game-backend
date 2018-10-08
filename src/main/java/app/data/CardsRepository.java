@@ -1,17 +1,15 @@
 package app.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import app.hearthstone.parsers.CardParser;
 import app.model.hearthstone.Card;
 import app.model.hearthstone.CardType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 @Repository
 public class CardsRepository {

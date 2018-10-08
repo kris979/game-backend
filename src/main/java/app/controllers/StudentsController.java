@@ -4,7 +4,9 @@ import app.data.StudentRepository;
 import app.model.Student;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -19,14 +21,13 @@ public class StudentsController {
         super();
 
         this.studentRepository = studentRepository;
-
     }
 
 
     @RequestMapping(value = "/h2/students", method = RequestMethod.GET)
     public List<Student> students() {
-        this.studentRepository.save(new Student("kris", "123"));
-        this.studentRepository.save(new Student("aga", "1233"));
+        this.studentRepository.save(new Student("kris", "1"));
+        this.studentRepository.save(new Student("aga", "2"));
 //        Iterable<Student> all = this.studentRepository.findAll();
 //        all.forEach(student -> System.out.println(student));
         return Lists.newArrayList(studentRepository.findAll());

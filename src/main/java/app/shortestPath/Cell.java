@@ -1,9 +1,9 @@
 package app.shortestPath;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.LinkedList;
 import java.util.Queue;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Cell implements Comparable<Cell> {
 	

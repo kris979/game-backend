@@ -1,13 +1,12 @@
 package app.services;
 
-import java.util.List;
-import java.util.Queue;
-
+import app.shortestPath.Board;
+import app.shortestPath.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.shortestPath.Board;
-import app.shortestPath.Cell;
+import java.util.List;
+import java.util.Queue;
 
 @Service
 public class BoardServices {

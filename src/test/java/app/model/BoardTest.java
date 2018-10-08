@@ -1,16 +1,15 @@
 package app.model;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import app.shortestPath.Board;
+import app.shortestPath.Cell;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Queue;
 
-import org.junit.Test;
-
-import app.shortestPath.Board;
-import app.shortestPath.Cell;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 /*
 

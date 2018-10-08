@@ -1,13 +1,12 @@
 package app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Student {
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "COL_GEN", sequenceName = "COL_SQE",schema="TEST")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COL_GEN")
     private Long id;
     private String name;
     private String passportNumber;

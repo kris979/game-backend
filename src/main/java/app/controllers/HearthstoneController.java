@@ -1,18 +1,13 @@
 package app.controllers;
-import java.util.List;
-import java.util.Queue;
 
+import app.data.CardsRepository;
+import app.model.hearthstone.Card;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.data.CardsRepository;
-import app.model.hearthstone.Card;
-import app.services.BoardServices;
-import app.shortestPath.Cell;
+import java.util.List;
 
 @RestController
 @RequestMapping("/hearthstone")

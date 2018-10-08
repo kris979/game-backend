@@ -1,8 +1,7 @@
 package app.services;
 
-import org.springframework.stereotype.Service;
-
 import app.model.Room;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;

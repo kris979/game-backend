@@ -58,10 +58,11 @@
         </dependency>
 
 		<!--oracle does not have public maven repo, you always need to download jars from oracle website -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0</version>
+        </dependency>
 
         <!--swagger-->
         <dependency>
