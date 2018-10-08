@@ -4,12 +4,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.*;
+
 import java.io.IOException;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
+
 import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Collectors.toSet;
 
 import org.junit.Test;
 
@@ -17,7 +16,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import app.hearthstone.parsers.CardParser;
-import app.model.Card;
+import app.model.hearthstone.Card;
 
 public class CardParserTest {
 	

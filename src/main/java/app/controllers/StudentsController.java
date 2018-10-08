@@ -1,17 +1,12 @@
 package app.controllers;
 
-import app.data.CardsRepository;
 import app.data.StudentRepository;
-import app.model.Card;
 import app.model.Student;
-import app.services.BoardServices;
-import app.shortestPath.Cell;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Queue;
 
 @RestController
 @RequestMapping("/api")
