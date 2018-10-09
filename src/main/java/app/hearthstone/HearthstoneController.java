@@ -1,9 +1,8 @@
-package app.controllers;
+package app.hearthstone;
 
-import app.model.hearthstone.Card;
-import app.model.hearthstone.CardEntity;
-import app.model.hearthstone.CardType;
-import app.services.CardService;
+import app.hearthstone.model.Card;
+import app.hearthstone.model.CardEntity;
+import app.hearthstone.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

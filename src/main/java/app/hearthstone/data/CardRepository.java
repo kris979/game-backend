@@ -1,7 +1,7 @@
-package app.data;
+package app.hearthstone.data;
 
-import app.model.hearthstone.CardEntity;
-import app.model.hearthstone.CardType;
+import app.hearthstone.model.CardEntity;
+import app.hearthstone.model.CardType;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

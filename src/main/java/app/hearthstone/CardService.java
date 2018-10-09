@@ -1,10 +1,10 @@
-package app.services;
+package app.hearthstone;
 
-import app.data.CardRepository;
-import app.data.CardXMLRepository;
-import app.model.hearthstone.Card;
-import app.model.hearthstone.CardEntity;
-import app.model.hearthstone.CardType;
+import app.hearthstone.data.CardRepository;
+import app.hearthstone.data.CardXMLRepository;
+import app.hearthstone.model.Card;
+import app.hearthstone.model.CardEntity;
+import app.hearthstone.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

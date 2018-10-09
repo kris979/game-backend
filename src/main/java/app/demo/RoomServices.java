@@ -1,6 +1,6 @@
-package app.services;
+package app.demo;
 
-import app.model.Room;
+import app.demo.Room;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

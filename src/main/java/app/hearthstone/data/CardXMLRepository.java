@@ -1,8 +1,8 @@
-package app.data;
+package app.hearthstone.data;
 
 import app.hearthstone.parsers.CardParser;
-import app.model.hearthstone.Card;
-import app.model.hearthstone.CardType;
+import app.hearthstone.model.Card;
+import app.hearthstone.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

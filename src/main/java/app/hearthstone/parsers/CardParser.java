@@ -1,6 +1,6 @@
 package app.hearthstone.parsers;
 
-import app.model.hearthstone.Card;
+import app.hearthstone.model.Card;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

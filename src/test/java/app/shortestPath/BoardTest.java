@@ -1,4 +1,4 @@
-package app.model;
+package app.shortestPath;
 
 import app.shortestPath.Board;
 import app.shortestPath.Cell;

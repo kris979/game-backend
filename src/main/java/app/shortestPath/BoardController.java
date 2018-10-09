@@ -1,6 +1,6 @@
-package app.controllers;
+package app.shortestPath;
 
-import app.services.BoardServices;
+import app.shortestPath.BoardServices;
 import app.shortestPath.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

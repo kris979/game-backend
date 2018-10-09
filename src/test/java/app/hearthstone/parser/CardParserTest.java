@@ -1,7 +1,7 @@
 package app.hearthstone.parser;
 
 import app.hearthstone.parsers.CardParser;
-import app.model.hearthstone.Card;
+import app.hearthstone.model.Card;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import org.junit.Test;

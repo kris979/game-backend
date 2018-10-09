@@ -1,4 +1,4 @@
-package app.model.hearthstone;
+package app.hearthstone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

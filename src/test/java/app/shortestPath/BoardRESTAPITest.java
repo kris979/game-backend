@@ -1,4 +1,4 @@
-package app.controllers;
+package app.shortestPath;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class HelloControllerTest {
+public class BoardRESTAPITest {
 
     @Autowired
     private MockMvc mvc;
