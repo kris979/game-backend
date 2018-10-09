@@ -1,7 +1,7 @@
 package app.services;
 
 import app.data.CardRepository;
-import app.data.CardsRepositoryImpl;
+import app.data.CardXMLRepository;
 import app.model.hearthstone.Card;
 import app.model.hearthstone.CardEntity;
 import app.model.hearthstone.CardType;
@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public class CardService {
 
-    private CardsRepositoryImpl cardsRepository;
+    private CardXMLRepository cardsRepository;
     private CardRepository databaseRepository;
 
     @Autowired
-    public CardService(CardsRepositoryImpl cardsRepository, CardRepository databaseRepository) {
+    public CardService(CardXMLRepository cardsRepository, CardRepository databaseRepository) {
         this.cardsRepository = cardsRepository;
         this.databaseRepository = databaseRepository;
         saveMinions();

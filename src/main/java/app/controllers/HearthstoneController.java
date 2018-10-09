@@ -1,6 +1,5 @@
 package app.controllers;
 
-import app.data.CardsRepositoryImpl;
 import app.model.hearthstone.Card;
 import app.model.hearthstone.CardEntity;
 import app.model.hearthstone.CardType;

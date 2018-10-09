@@ -12,16 +12,14 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Repository
-public class CardsRepositoryImpl {
+public class CardXMLRepository {
 
-    private CardParser parser;
     private List<Card> cards = new ArrayList<>();
 
     @Autowired
-    public CardsRepositoryImpl(CardParser parser) {
+    public CardXMLRepository(CardParser parser) {
         super();
-        this.parser = parser;
-        cards = this.parser.getCards();
+        cards = parser.getCards();
     }
 
     public List<Card> getMinions() {
