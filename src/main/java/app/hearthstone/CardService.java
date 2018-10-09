@@ -21,7 +21,7 @@ public class CardService {
     public CardService(CardXMLRepository cardsRepository, CardRepository databaseRepository) {
         this.cardsRepository = cardsRepository;
         this.databaseRepository = databaseRepository;
-        saveMinions();
+//        saveMinions();
     }
 
     private void saveMinions() {
