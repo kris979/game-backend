@@ -21,17 +21,20 @@ public class CardService {
     public CardService(CardXMLRepository cardsRepository, CardRepository databaseRepository) {
         this.cardsRepository = cardsRepository;
         this.databaseRepository = databaseRepository;
-//        saveMinions();
     }
 
-    private void saveMinions() {
-        List<Card> minions = cardsRepository.getMinions();
+    public void saveAll() {
+        List<Card> minions = cardsRepository.getAll();
         List<CardEntity> converted = new ArrayList<>();
-        for (Card minion : minions) {
-            CardEntity card = convert(minion);
-            converted.add(card);
+        for (Card card : minions) {
+            CardEntity entity = convert(card);
+            converted.add(entity);
         }
         converted.stream().forEach(card -> databaseRepository.save(card));
+    }
+
+    public void deleteAll() {
+        databaseRepository.deleteAll();
     }
 
     private CardEntity convert(Card minion) {
@@ -43,34 +46,32 @@ public class CardService {
         final String rarity = minion.getRarity();
         final Integer health = minion.getHealth();
         final Integer attack = minion.getAttack();
-        return new CardEntity(name, rarity, health,attack,cardType,race,cost,cardClass);
-    }
-
-    public List<Card> getCards() {
-        return cardsRepository.getHeros();
-    }
-
-    public List<Card> getMinions() {
-        return cardsRepository.getMinions();
-    }
-
-    public List<Card> getDragons() {
-        return cardsRepository.getDragons();
-    }
-
-    public List<Card> getHeroes() {
-        return cardsRepository.getHeros();
-    }
-
-    public List<Card> getSpells() {
-        return cardsRepository.getSpells();
-    }
-
-    public List<Card> getHeroPowers() {
-        return cardsRepository.getHeroPowers();
+        return new CardEntity(name, rarity, health, attack, cardType, race, cost, cardClass);
     }
 
     public List<CardEntity> getByType(CardType type) {
         return databaseRepository.findByCardType(type);
+    }
+
+    public List<CardEntity> getAll() {
+        List<CardEntity> target = new ArrayList<>();
+        databaseRepository.findAll().forEach(target::add);
+        return target;
+    }
+
+    public List<CardEntity> getByAttack(Integer attack) {
+        return databaseRepository.findByAttack(attack);
+    }
+
+    public List<CardEntity> getByCost(Integer cost) {
+        return databaseRepository.findByCost(cost);
+    }
+
+    public List<CardEntity> getByHealth(Integer health) {
+        return databaseRepository.findByHealth(health);
+    }
+
+    public List<CardEntity> getByHealthAndAttack(Integer health, Integer attack) {
+        return databaseRepository.findByHealthAndAttack(health, attack);
     }
 }

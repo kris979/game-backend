@@ -9,4 +9,12 @@ import java.util.List;
 public interface CardRepository extends CrudRepository<CardEntity, Long> {
 
     List<CardEntity> findByCardType(CardType type);
+
+    List<CardEntity> findByHealth(Integer health);
+
+    List<CardEntity> findByAttack(Integer attack);
+
+    List<CardEntity> findByCost(Integer cost);
+
+    List<CardEntity> findByHealthAndAttack(Integer health, Integer attack);
 }

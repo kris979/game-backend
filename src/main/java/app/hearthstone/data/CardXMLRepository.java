@@ -49,4 +49,8 @@ public class CardXMLRepository {
     public List<Card> getDragons() {
         return cards.stream().filter(c -> c.getRace() != null && c.getRace().equals("DRAGON")).collect(toList());
     }
+
+    public List<Card> getAll() {
+        return cards;
+    }
 }
