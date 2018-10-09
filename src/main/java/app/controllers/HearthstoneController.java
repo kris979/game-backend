@@ -14,42 +14,38 @@ import java.util.List;
 @RequestMapping("/hearthstone")
 public class HearthstoneController {
 
-    private CardsRepositoryImpl cardRepository;
     private CardService cardService;
 
     @Autowired
-    public HearthstoneController(CardsRepositoryImpl cardRepository, CardService cardService){
+    public HearthstoneController(CardService cardService) {
         super();
-        this.cardRepository = cardRepository;
         this.cardService = cardService;
     }
 
-	@RequestMapping(value = "/heros", method = RequestMethod.GET)
+    @RequestMapping(value = "/heros", method = RequestMethod.GET)
     public List<Card> heros() {
-		return cardRepository.getHeros();
+        return cardService.getCards();
     }
 
-	@RequestMapping(value = "/minions", method = RequestMethod.GET)
+    @RequestMapping(value = "/minions", method = RequestMethod.GET)
     public List<Card> minions() {
-//		cardService.saveMinions();
-        return cardRepository.getMinions();
+        return cardService.getMinions();
     }
 
-	@RequestMapping(value = "/minions/dragons", method = RequestMethod.GET)
+    @RequestMapping(value = "/minions/dragons", method = RequestMethod.GET)
     public List<Card> dragons() {
-		return cardRepository.getDragons();
+        return cardService.getDragons();
     }
 
-	@RequestMapping(value = "/spells", method = RequestMethod.GET)
+    @RequestMapping(value = "/spells", method = RequestMethod.GET)
     public List<Card> spells() {
-		return cardRepository.getSpells();
+        return cardService.getSpells();
     }
 
     @RequestMapping(value = "/heroPowers", method = RequestMethod.GET)
     public List<Card> heroPowers() {
-        return cardRepository.getHeroPowers();
+        return cardService.getHeroPowers();
     }
-
 
     //localhost:8080/swagger-ui.html
 //    http://localhost:8080/v2/api-docs
