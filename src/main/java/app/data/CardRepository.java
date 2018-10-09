@@ -1,7 +1,5 @@
 package app.data;
 
-import app.model.Student;
-import app.model.hearthstone.Card;
 import app.model.hearthstone.CardEntity;
 import app.model.hearthstone.CardType;
 import org.springframework.data.repository.CrudRepository;
