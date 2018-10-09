@@ -2,11 +2,11 @@ package app.controllers;
 
 import app.data.CardsRepositoryImpl;
 import app.model.hearthstone.Card;
+import app.model.hearthstone.CardEntity;
+import app.model.hearthstone.CardType;
 import app.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,6 +46,12 @@ public class HearthstoneController {
     public List<Card> heroPowers() {
         return cardService.getHeroPowers();
     }
+
+    @RequestMapping(value = "/cards", method = RequestMethod.GET)
+    public List<CardEntity> cards(@RequestParam(value = "type", required = false) CardType type) {
+        return cardService.getByType(type);
+    }
+
 
     //localhost:8080/swagger-ui.html
 //    http://localhost:8080/v2/api-docs

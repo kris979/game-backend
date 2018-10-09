@@ -21,6 +21,7 @@ public class CardService {
     public CardService(CardsRepositoryImpl cardsRepository, CardRepository databaseRepository) {
         this.cardsRepository = cardsRepository;
         this.databaseRepository = databaseRepository;
+        saveMinions();
     }
 
     private void saveMinions() {
@@ -67,5 +68,9 @@ public class CardService {
 
     public List<Card> getHeroPowers() {
         return cardsRepository.getHeroPowers();
+    }
+
+    public List<CardEntity> getByType(CardType type) {
+        return databaseRepository.findByCardType(type);
     }
 }
