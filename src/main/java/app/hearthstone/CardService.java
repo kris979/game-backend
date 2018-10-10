@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardService {
@@ -32,31 +33,18 @@ public class CardService {
         }
         converted.stream().forEach(card -> databaseRepository.save(card));
     }
+    public List<CardEntity> getAll() {
+        List<CardEntity> target = new ArrayList<>();
+        databaseRepository.findAll().forEach(target::add);
+        return target;
+    }
 
     public void deleteAll() {
         databaseRepository.deleteAll();
     }
 
-    private CardEntity convert(Card minion) {
-        final CardType cardType = minion.getType();
-        final String race = minion.getRace();
-        final Integer cost = minion.getCost();
-        final String cardClass = minion.getCardClass();
-        final String name = minion.getName();
-        final String rarity = minion.getRarity();
-        final Integer health = minion.getHealth();
-        final Integer attack = minion.getAttack();
-        return new CardEntity(name, rarity, health, attack, cardType, race, cost, cardClass);
-    }
-
     public List<CardEntity> getByType(CardType type) {
         return databaseRepository.findByCardType(type);
-    }
-
-    public List<CardEntity> getAll() {
-        List<CardEntity> target = new ArrayList<>();
-        databaseRepository.findAll().forEach(target::add);
-        return target;
     }
 
     public List<CardEntity> getByAttack(Integer attack) {
@@ -71,7 +59,21 @@ public class CardService {
         return databaseRepository.findByHealth(health);
     }
 
-    public List<CardEntity> getByHealthAndAttack(Integer health, Integer attack) {
-        return databaseRepository.findByHealthAndAttack(health, attack);
+    public List<CardEntity> getByHealthAndAttack(Integer health, Optional<Integer> attack) {
+//        return databaseRepository.findByHealthAndAttack(health, attack);
+        return databaseRepository.findByHealthAndOptionalAttack(health, attack);
+    }
+
+
+    private CardEntity convert(Card minion) {
+        final CardType cardType = minion.getType();
+        final String race = minion.getRace();
+        final Integer cost = minion.getCost();
+        final String cardClass = minion.getCardClass();
+        final String name = minion.getName();
+        final String rarity = minion.getRarity();
+        final Integer health = minion.getHealth();
+        final Integer attack = minion.getAttack();
+        return new CardEntity(name, rarity, health, attack, cardType, race, cost, cardClass);
     }
 }
