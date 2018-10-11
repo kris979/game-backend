@@ -35,12 +35,10 @@ public class CardService {
         }
         converted.stream().forEach(card -> databaseRepository.save(card));
     }
-    public List<CardEntity> getAll(Integer page, Integer size, String sortBy) {
+
+    public List<CardEntity> getAll(Integer page, Integer size, String sortBy, Sort.Direction direction) {
         List<CardEntity> target = new ArrayList<>();
-
-        Sort sort = Sort.by(Sort.Order.asc(sortBy));
-        PageRequest pageRequest = PageRequest.of(page, size, sort);
-
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(direction, sortBy));
         databaseRepository.findAll(pageRequest).forEach(target::add);
         return target;
     }

@@ -4,6 +4,7 @@ import app.hearthstone.model.Card;
 import app.hearthstone.model.CardEntity;
 import app.hearthstone.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -30,11 +31,12 @@ public class HearthstoneController {
     @RequestMapping(value = "/cards", method = RequestMethod.GET)
     public List<CardEntity> cards(@RequestParam(value = "health", required = false) Integer health,
                                   @RequestParam(value = "attack", required = false) Integer attack,
-                                  @RequestParam(value = "page", required = false) Integer page,
-                                  @RequestParam(value = "size", required = false) Integer size,
-                                  @RequestParam(value = "sortBy", required = false) String sortBy ) {
+                                  @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                  @RequestParam(value = "size", required = false, defaultValue = "20") Integer size,
+                                  @RequestParam(value = "sortBy", required = false, defaultValue = "name") String sortBy,
+                                  @RequestParam(value = "direction", required = false, defaultValue = "ASC") Sort.Direction direction) {
         if (health == null) {
-            return cardService.getAll(page, size, sortBy);
+            return cardService.getAll(page, size, sortBy, direction);
         } else {
             return cardService.getByHealthAndAttack(health, Optional.ofNullable(attack));
         }
