@@ -23,9 +23,14 @@ public class HearthstoneController {
         this.cardService = cardService;
     }
 
-    @RequestMapping(value = "/cards/{type}", method = RequestMethod.GET)
-    public List<CardEntity> cards(@PathVariable("type") CardType type) {
-        return cardService.getByType(type);
+    @RequestMapping(value = "/cards", method = RequestMethod.POST)
+    public void createAll() {
+        cardService.saveAll();
+    }
+
+    @RequestMapping(value = "/cards", method = RequestMethod.DELETE)
+    public void deleteAll() {
+        cardService.deleteAll();
     }
 
     @RequestMapping(value = "/cards", method = RequestMethod.GET)
@@ -42,14 +47,9 @@ public class HearthstoneController {
         }
     }
 
-    @RequestMapping(value = "/cards", method = RequestMethod.POST)
-    public void createAll() {
-        cardService.saveAll();
-    }
-
-    @RequestMapping(value = "/cards", method = RequestMethod.DELETE)
-    public void deleteAll() {
-        cardService.deleteAll();
+    @RequestMapping(value = "/cards/{id}", method = RequestMethod.GET)
+    public CardEntity cardsById(@PathVariable("id") Long id) {
+        return cardService.getById(id);
     }
 
     //localhost:8080/swagger-ui.html

@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -78,5 +79,14 @@ public class CardService {
         final Integer health = minion.getHealth();
         final Integer attack = minion.getAttack();
         return new CardEntity(name, rarity, health, attack, cardType, race, cost, cardClass);
+    }
+
+    public CardEntity getById(Long id) throws EntityNotFoundException {
+        Optional<CardEntity> card = this.databaseRepository.findById(id);
+        if (!card.isPresent()) {
+            throw new EntityNotFoundException(String.format("Card with id=%d does not exist. Are you sure you have got correct id?", id));
+        } else {
+            return card.get();
+        }
     }
 }
