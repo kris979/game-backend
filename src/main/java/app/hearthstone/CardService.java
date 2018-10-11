@@ -6,6 +6,8 @@ import app.hearthstone.model.Card;
 import app.hearthstone.model.CardEntity;
 import app.hearthstone.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,9 +35,13 @@ public class CardService {
         }
         converted.stream().forEach(card -> databaseRepository.save(card));
     }
-    public List<CardEntity> getAll() {
+    public List<CardEntity> getAll(Integer page, Integer size, String sortBy) {
         List<CardEntity> target = new ArrayList<>();
-        databaseRepository.findAll().forEach(target::add);
+
+        Sort sort = Sort.by(Sort.Order.asc(sortBy));
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+
+        databaseRepository.findAll(pageRequest).forEach(target::add);
         return target;
     }
 
@@ -60,7 +66,6 @@ public class CardService {
     }
 
     public List<CardEntity> getByHealthAndAttack(Integer health, Optional<Integer> attack) {
-//        return databaseRepository.findByHealthAndAttack(health, attack);
         return databaseRepository.findByHealthAndOptionalAttack(health, attack);
     }
 

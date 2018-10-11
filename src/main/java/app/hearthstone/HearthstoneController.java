@@ -28,9 +28,16 @@ public class HearthstoneController {
     }
 
     @RequestMapping(value = "/cards", method = RequestMethod.GET)
-    public List<CardEntity> cards(@RequestParam(value = "health", required = true) Integer health,
-                                  @RequestParam(value = "attack", required = false) Integer attack) {
-        return cardService.getByHealthAndAttack(health, Optional.ofNullable(attack));
+    public List<CardEntity> cards(@RequestParam(value = "health", required = false) Integer health,
+                                  @RequestParam(value = "attack", required = false) Integer attack,
+                                  @RequestParam(value = "page", required = false) Integer page,
+                                  @RequestParam(value = "size", required = false) Integer size,
+                                  @RequestParam(value = "sortBy", required = false) String sortBy ) {
+        if (health == null) {
+            return cardService.getAll(page, size, sortBy);
+        } else {
+            return cardService.getByHealthAndAttack(health, Optional.ofNullable(attack));
+        }
     }
 
     @RequestMapping(value = "/cards", method = RequestMethod.POST)
