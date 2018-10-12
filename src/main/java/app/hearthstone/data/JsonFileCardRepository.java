@@ -2,21 +2,28 @@ package app.hearthstone.data;
 
 import app.hearthstone.model.Card;
 import app.hearthstone.model.CardType;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 @Repository
-public class CardFileRepository {
+public class JsonFileCardRepository {
 
     private List<Card> cards = new ArrayList<>();
 
     @Autowired
-    public CardFileRepository(CardFileReader parser) {
+    public JsonFileCardRepository(CardFileReader parser) {
         super();
         cards = parser.getCards();
     }

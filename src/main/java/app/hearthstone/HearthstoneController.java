@@ -1,15 +1,11 @@
 package app.hearthstone;
 
-import app.hearthstone.model.Card;
 import app.hearthstone.model.CardEntity;
-import app.hearthstone.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/hearthstone")
@@ -36,15 +32,13 @@ public class HearthstoneController {
     @RequestMapping(value = "/cards", method = RequestMethod.GET)
     public List<CardEntity> cards(@RequestParam(value = "health", required = false) Integer health,
                                   @RequestParam(value = "attack", required = false) Integer attack,
+                                  @RequestParam(value = "cost", required = false) Integer cost,
+                                  @RequestParam(value = "rarity", required = false) String rarity,
                                   @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                                   @RequestParam(value = "size", required = false, defaultValue = "20") Integer size,
                                   @RequestParam(value = "sortBy", required = false, defaultValue = "name") String sortBy,
                                   @RequestParam(value = "direction", required = false, defaultValue = "ASC") Sort.Direction direction) {
-        if (health == null && attack == null) {
-            return cardService.getAll(page, size, sortBy, direction);
-        } else {
-            return cardService.getByHealthOrAttack(Optional.ofNullable(health), Optional.ofNullable(attack));
-        }
+            return cardService.getBy(health, attack, cost, rarity,page, size, sortBy, direction);
     }
 
     @RequestMapping(value = "/cards/{id}", method = RequestMethod.GET)

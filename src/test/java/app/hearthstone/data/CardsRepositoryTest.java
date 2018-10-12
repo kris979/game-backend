@@ -17,7 +17,7 @@ import static org.junit.Assert.assertThat;
 public class CardsRepositoryTest {
 
 	@Autowired
-	private CardFileRepository repository;
+	private JsonFileCardRepository repository;
 	
 	@Test
 	public void testMinions() {

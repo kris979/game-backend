@@ -1,7 +1,7 @@
 package app.hearthstone;
 
-import app.hearthstone.data.CardRepository;
-import app.hearthstone.data.CardFileRepository;
+import app.hearthstone.data.DbCardRepository;
+import app.hearthstone.data.JsonFileCardRepository;
 import app.hearthstone.model.Card;
 import app.hearthstone.model.CardEntity;
 import app.hearthstone.model.CardEntityBuilder;
@@ -20,11 +20,11 @@ import java.util.Optional;
 @Service
 public class CardService {
 
-    private CardFileRepository cardsRepository;
-    private CardRepository databaseRepository;
+    private JsonFileCardRepository cardsRepository;
+    private DbCardRepository databaseRepository;
 
     @Autowired
-    public CardService(CardFileRepository cardsRepository, CardRepository databaseRepository) {
+    public CardService(JsonFileCardRepository cardsRepository, DbCardRepository databaseRepository) {
         this.cardsRepository = cardsRepository;
         this.databaseRepository = databaseRepository;
     }
@@ -38,11 +38,6 @@ public class CardService {
             converted.add(entity);
         }
         converted.stream().forEach(card -> databaseRepository.save(card));
-    }
-
-    public List<CardEntity> getAll(Integer page, Integer size, String sortBy, Sort.Direction direction) {
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(direction, sortBy));
-        return databaseRepository.findAll(pageRequest).getContent();
     }
 
     public void deleteAll() {
@@ -65,11 +60,12 @@ public class CardService {
         return databaseRepository.findByHealth(health);
     }
 
-    public List<CardEntity> getByHealthOrAttack(Optional<Integer> health, Optional<Integer> attack) {
-        return databaseRepository.findByHealthOrOptionalAttack(health, attack);
+    public List<CardEntity> getBy(Integer health, Integer attack, Integer cost, String rarity, Integer page, Integer size, String sortBy, Sort.Direction direction) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(direction, sortBy));
+        return databaseRepository.findBy(health, attack, cost, rarity, pageRequest).getContent();
     }
 
-    private CardEntity convert(Card minion) {
+    private CardEntity convert(@org.jetbrains.annotations.NotNull Card minion) {
         final CardType cardType = minion.getType();
         final String race = minion.getRace();
         final Integer cost = minion.getCost();

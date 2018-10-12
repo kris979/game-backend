@@ -12,12 +12,12 @@ public class CardEntity {
 
     private String name;
     private String rarity;
+    private String cardClass;
+    private String race;
     private Integer health;
     private Integer attack;
-    private CardType cardType;
-    private String race;
     private Integer cost;
-    private String cardClass;
+    private CardType cardType;
 
     public CardEntity() {
     }
