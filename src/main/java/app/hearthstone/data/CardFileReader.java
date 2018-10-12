@@ -1,4 +1,4 @@
-package app.hearthstone.parsers;
+package app.hearthstone.data;
 
 import app.hearthstone.model.Card;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CardParser {
+public class CardFileReader {
 
 	@Value("${card.filename}")
 	private	Resource resource = new ClassPathResource("hearthstone_cards.json");
@@ -23,7 +23,7 @@ public class CardParser {
 	private List<Card> cards = new ArrayList<>();
 
 	@Autowired
-	public CardParser() {
+	public CardFileReader() {
 		super();
 		try {
 			cards = mapper.readValue(resource.getFile(), new TypeReference<List<Card>>(){});

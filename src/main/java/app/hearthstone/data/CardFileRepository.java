@@ -1,6 +1,5 @@
 package app.hearthstone.data;
 
-import app.hearthstone.parsers.CardParser;
 import app.hearthstone.model.Card;
 import app.hearthstone.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,12 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @Repository
-public class CardXMLRepository {
+public class CardFileRepository {
 
     private List<Card> cards = new ArrayList<>();
 
     @Autowired
-    public CardXMLRepository(CardParser parser) {
+    public CardFileRepository(CardFileReader parser) {
         super();
         cards = parser.getCards();
     }
