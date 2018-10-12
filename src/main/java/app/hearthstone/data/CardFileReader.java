@@ -17,8 +17,9 @@ import java.util.List;
 public class CardFileReader {
 
 	@Value("${card.filename}")
+	private String fileName;
+
 	private	Resource resource = new ClassPathResource("hearthstone_cards.json");
-	
 	private ObjectMapper mapper = new ObjectMapper();
 	private List<Card> cards = new ArrayList<>();
 

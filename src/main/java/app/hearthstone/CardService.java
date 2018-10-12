@@ -4,11 +4,13 @@ import app.hearthstone.data.CardRepository;
 import app.hearthstone.data.CardFileRepository;
 import app.hearthstone.model.Card;
 import app.hearthstone.model.CardEntity;
+import app.hearthstone.model.CardEntityBuilder;
 import app.hearthstone.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class CardService {
         this.databaseRepository = databaseRepository;
     }
 
+    @Transactional
     public void saveAll() {
         List<Card> minions = cardsRepository.getAll();
         List<CardEntity> converted = new ArrayList<>();
@@ -38,10 +41,8 @@ public class CardService {
     }
 
     public List<CardEntity> getAll(Integer page, Integer size, String sortBy, Sort.Direction direction) {
-        List<CardEntity> target = new ArrayList<>();
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(direction, sortBy));
-        databaseRepository.findAll(pageRequest).forEach(target::add);
-        return target;
+        return databaseRepository.findAll(pageRequest).getContent();
     }
 
     public void deleteAll() {
@@ -68,7 +69,6 @@ public class CardService {
         return databaseRepository.findByHealthAndOptionalAttack(health, attack);
     }
 
-
     private CardEntity convert(Card minion) {
         final CardType cardType = minion.getType();
         final String race = minion.getRace();
@@ -78,7 +78,7 @@ public class CardService {
         final String rarity = minion.getRarity();
         final Integer health = minion.getHealth();
         final Integer attack = minion.getAttack();
-        return new CardEntity(name, rarity, health, attack, cardType, race, cost, cardClass);
+        return new CardEntityBuilder().withName(name).withRarity(rarity).withHealth(health).withAttack(attack).withCardType(cardType).withRace(race).withCost(cost).withCardClass(cardClass).createCardEntity();
     }
 
     public CardEntity getById(Long id) throws EntityNotFoundException {
