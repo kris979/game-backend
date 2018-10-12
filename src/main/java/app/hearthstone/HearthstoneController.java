@@ -40,10 +40,10 @@ public class HearthstoneController {
                                   @RequestParam(value = "size", required = false, defaultValue = "20") Integer size,
                                   @RequestParam(value = "sortBy", required = false, defaultValue = "name") String sortBy,
                                   @RequestParam(value = "direction", required = false, defaultValue = "ASC") Sort.Direction direction) {
-        if (health == null) {
+        if (health == null && attack == null) {
             return cardService.getAll(page, size, sortBy, direction);
         } else {
-            return cardService.getByHealthAndAttack(health, Optional.ofNullable(attack));
+            return cardService.getByHealthOrAttack(Optional.ofNullable(health), Optional.ofNullable(attack));
         }
     }
 

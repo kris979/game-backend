@@ -65,8 +65,8 @@ public class CardService {
         return databaseRepository.findByHealth(health);
     }
 
-    public List<CardEntity> getByHealthAndAttack(Integer health, Optional<Integer> attack) {
-        return databaseRepository.findByHealthAndOptionalAttack(health, attack);
+    public List<CardEntity> getByHealthOrAttack(Optional<Integer> health, Optional<Integer> attack) {
+        return databaseRepository.findByHealthOrOptionalAttack(health, attack);
     }
 
     private CardEntity convert(Card minion) {

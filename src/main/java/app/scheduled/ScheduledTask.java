@@ -15,7 +15,7 @@ public class ScheduledTask {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 6000) //1min
+    @Scheduled(fixedRate = 60000) //1min
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }

@@ -27,8 +27,9 @@ public interface CardRepository extends JpaRepository<CardEntity, Long> {
 
     List<CardEntity> findByHealthAndAttack(Integer health, Integer attack);
 
-    @Query("select card from CardEntity card where card.health = :health and (:attack is null or card.attack = :attack)")
-    public List<CardEntity> findByHealthAndOptionalAttack(@Param("health") Integer health, @Param("attack") Optional<Integer> attack);
+    @Query("select card from CardEntity card where (:health is null or card.health = :health) and (:attack is null or card.attack = :attack)")
+    public List<CardEntity> findByHealthOrOptionalAttack(@Param("health") Optional<Integer> health,
+                                                          @Param("attack") Optional<Integer> attack);
 
 }
 
