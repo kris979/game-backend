@@ -36,5 +36,18 @@ public class CardFileReader {
 	public List<Card> getCards() {
 		return cards;
 	}
+
+
+	public List<Card> readClassicCards() {
+		Resource resource = new ClassPathResource("data/basic.json");
+		List<Card> cards = new ArrayList<>();
+		try {
+			cards = mapper.readValue(resource.getFile(), new TypeReference<List<Card>>() {
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return cards;
+	}
 }
 
