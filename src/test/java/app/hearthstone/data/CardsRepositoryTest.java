@@ -28,7 +28,7 @@ public class CardsRepositoryTest {
 
 	@Test
 	public void testHeros() {
-		List<Card> minions = repository.getHeros();
+		List<Card> minions = repository.getHeroes();
 		assertThat(minions, is(notNullValue()));
 		assertThat(minions.size(), is(greaterThan(0)));
 	}

@@ -11,22 +11,24 @@ import java.util.List;
 @RequestMapping("/hearthstone")
 public class HearthstoneController {
 
+    private DbService dbService;
     private CardService cardService;
 
     @Autowired
-    public HearthstoneController(CardService cardService) {
+    public HearthstoneController(DbService dbService, CardService cardService) {
         super();
+        this.dbService = dbService;
         this.cardService = cardService;
     }
 
     @RequestMapping(value = "/cards", method = RequestMethod.POST)
     public void createAll() {
-        cardService.saveAll();
+        dbService.saveAll(cardService.getMinions());
     }
 
     @RequestMapping(value = "/cards", method = RequestMethod.DELETE)
     public void deleteAll() {
-        cardService.deleteAll();
+        dbService.deleteAll();
     }
 
     @RequestMapping(value = "/cards", method = RequestMethod.GET)
@@ -38,13 +40,14 @@ public class HearthstoneController {
                                   @RequestParam(value = "size", required = false, defaultValue = "20") Integer size,
                                   @RequestParam(value = "sortBy", required = false, defaultValue = "name") String sortBy,
                                   @RequestParam(value = "direction", required = false, defaultValue = "ASC") Sort.Direction direction) {
-            return cardService.getBy(health, attack, cost, rarity,page, size, sortBy, direction);
+            return dbService.getBy(health, attack, cost, rarity,page, size, sortBy, direction);
     }
 
     @RequestMapping(value = "/cards/{id}", method = RequestMethod.GET)
     public CardEntity cardsById(@PathVariable("id") Long id) {
-        return cardService.getById(id);
+        return dbService.getById(id);
     }
+
 
     //localhost:8080/swagger-ui.html
 //    http://localhost:8080/v2/api-docs

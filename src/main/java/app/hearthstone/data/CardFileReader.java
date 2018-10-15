@@ -16,38 +16,42 @@ import java.util.List;
 @Component
 public class CardFileReader {
 
-	@Value("${card.filename}")
-	private String fileName;
+    @Value("${set.basic.filename}")
+    private String basicSetFileName;
 
-	private	Resource resource = new ClassPathResource("hearthstone_cards.json");
-	private ObjectMapper mapper = new ObjectMapper();
-	private List<Card> cards = new ArrayList<>();
+    @Value("${set.classic.filename}")
+    private String classicSetFileName;
 
-	@Autowired
-	public CardFileReader() {
-		super();
-		try {
-			cards = mapper.readValue(resource.getFile(), new TypeReference<List<Card>>(){});
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    @Value("${set.boomsday.filename}")
+    private String boomsdaySetFileName;
 
-	public List<Card> getCards() {
-		return cards;
-	}
+    private ObjectMapper mapper = new ObjectMapper();
 
+    @Autowired
+    public CardFileReader() {
+        super();
+    }
 
-	public List<Card> readClassicCards() {
-		Resource resource = new ClassPathResource("data/basic.json");
-		List<Card> cards = new ArrayList<>();
-		try {
-			cards = mapper.readValue(resource.getFile(), new TypeReference<List<Card>>() {
-			});
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return cards;
-	}
+    public List<Card> readBasicCards() {
+        return getCards(basicSetFileName);
+    }
+
+    public List<Card> readClassicCards() { return getCards(classicSetFileName); }
+
+    public List<Card> readBoomsdayCards() {
+        return getCards(boomsdaySetFileName);
+    }
+
+    private List<Card> getCards(String s) {
+        Resource resource = new ClassPathResource(s);
+        List<Card> cards = new ArrayList<>();
+        try {
+            cards = mapper.readValue(resource.getFile(), new TypeReference<List<Card>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cards;
+    }
 }
 

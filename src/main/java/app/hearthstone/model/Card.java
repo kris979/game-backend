@@ -1,417 +1,339 @@
 package app.hearthstone.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "cardId",
+        "dbfId",
+        "name",
+        "race",
+        "health",
+        "attack",
+        "durability",
+        "armor",
+        "cardSet",
+        "type",
+        "faction",
+        "rarity",
+        "cost",
+        "text",
+        "flavor",
+        "artist",
+        "collectible",
+        "elite",
+        "playerClass",
+        "howToGet",
+        "howToGetGold",
+        "img",
+        "imgGold",
+        "locale",
+        "mechanics"
+})
 public class Card {
 
-@JsonProperty("howToEarn")
-private String howToEarn;	
-@JsonProperty("howToEarnGolden")
-private String howToEarnGolden;	
-@JsonProperty("collectionText")
-private String collectionText;	
-@JsonProperty("artist")
-private String artist;
-@JsonProperty("attack")
-private Integer attack;
-@JsonProperty("spellDamage")
-private Integer spellDamage;
-@JsonProperty("cardClass")
-private String cardClass;
-@JsonProperty("collectible")
-private Boolean collectible;
-@JsonProperty("cost")
-private Integer cost;
-@JsonProperty("overload")
-private Integer overload;
-@JsonProperty("durability")
-private Integer durability;
-@JsonProperty("dbfId")
-private Integer dbfId;
-@JsonProperty("elite")
-private Boolean elite;
-@JsonProperty("flavor")
-private String flavor;
-@JsonProperty("health")
-private Integer health;
-@JsonProperty("id")
-private String id;
-@JsonProperty("mechanics")
-@Valid
-private List<String> mechanics = new ArrayList<String>();
-@JsonProperty("name")
-private String name;
-@JsonProperty("playRequirements")
-@Valid
-@JsonIgnore
-private PlayRequirements playRequirements;
-@JsonProperty("race")
-private String race;
-@JsonProperty("rarity")
-private String rarity;
-@JsonProperty("referencedTags")
-@Valid
-private List<String> referencedTags = new ArrayList<String>();
-@JsonProperty("set")
-private String set;
-@JsonProperty("targetingArrowText")
-private String targetingArrowText;
-@JsonProperty("text")
-private String text;
-@JsonProperty("type")
-private CardType type; //HERO, MINION, SPELL, ENCHANTMENT (buff), WEAPON and HERO_POWER
+    @JsonProperty("cardId")
+    private String cardId;
+    @JsonProperty("dbfId")
+    private String dbfId;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("race")
+    private String race;
+    @JsonProperty("health")
+    private Integer health;
+    @JsonProperty("attack")
+    private Integer attack;
+    @JsonProperty("durability")
+    private Integer durability;
+    @JsonProperty("armor")
+    private Integer armor;
+    @JsonProperty("cardSet")
+    private String cardSet;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("faction")
+    private String faction;
+    @JsonProperty("rarity")
+    private String rarity;
+    @JsonProperty("cost")
+    private Integer cost;
+    @JsonProperty("text")
+    private String text;
+    @JsonProperty("flavor")
+    private String flavor;
+    @JsonProperty("artist")
+    private String artist;
+    @JsonProperty("collectible")
+    private Boolean collectible;
+    @JsonProperty("elite")
+    private Boolean elite;
+    @JsonProperty("playerClass")
+    private String playerClass;
+    @JsonProperty("howToGet")
+    private String howToGet;
+    @JsonProperty("howToGetGold")
+    private String howToGetGold;
+    @JsonProperty("img")
+    private String img;
+    @JsonProperty("imgGold")
+    private String imgGold;
+    @JsonProperty("locale")
+    private String locale;
+    @JsonProperty("mechanics")
+    private List<Mechanic> mechanics = null;
 
-/**
-* No args constructor for use in serialization
-* 
-*/
-public Card() {
-}
+    @JsonProperty("cardId")
+    public String getCardId() {
+        return cardId;
+    }
 
-/**
-* 
-* @param text
-* @param set
-* @param flavor
-* @param rarity
-* @param type
-* @param health
-* @param cost
-* @param id
-* @param cardClass
-* @param name
-* @param collectible
-* @param mechanics
-* @param dbfId
-* @param artist
-* @param attack
-*/
-public Card(String howToEarn, String howToEarnGolden, String collectionText, String artist, Integer attack, Integer spellDamage, String cardClass, Boolean collectible, Integer overload, Integer cost, Integer dbfId, Integer durability, Boolean elite, String flavor, Integer health, String id, List<String> mechanics, String name, PlayRequirements playRequirements,String race, String rarity, List<String> referencedTags, String set, String targetingArrowText, String text, CardType type) {
-super();
-this.howToEarn = howToEarn;
-this.howToEarnGolden = howToEarnGolden;
-this.collectionText = collectionText;
-this.artist = artist;
-this.attack = attack;
-this.cardClass = cardClass;
-this.collectible = collectible;
-this.cost = cost;
-this.spellDamage = spellDamage;
-this.overload = overload;
-this.dbfId = dbfId;
-this.durability = durability;
-this.elite = elite;
-this.flavor = flavor;
-this.health = health;
-this.id = id;
-this.mechanics = mechanics;
-this.name = name;
-this.playRequirements = playRequirements;
-this.race = race;
-this.rarity = rarity;
-this.referencedTags = referencedTags;
-this.set = set;
-this.targetingArrowText = targetingArrowText;
-this.text = text;
-this.type = type;
-}
+    @JsonProperty("cardId")
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
 
-@JsonProperty("howToEarn")
-public String getHowToEarn() {
-return howToEarn;
-}
+    @JsonProperty("dbfId")
+    public String getDbfId() {
+        return dbfId;
+    }
 
-@JsonProperty("howToEarn")
-public void setHowToEarn(String howToEarn) {
-this.howToEarn = howToEarn;
-}
+    @JsonProperty("dbfId")
+    public void setDbfId(String dbfId) {
+        this.dbfId = dbfId;
+    }
 
-@JsonProperty("howToEarnGolden")
-public String getHowToEarnGolden() {
-return howToEarnGolden;
-}
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
 
-@JsonProperty("howToEarnGolden")
-public void setHowToEarnGolden(String howToEarnGolden) {
-this.howToEarnGolden = howToEarnGolden;
-}
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    @JsonProperty("race")
+    public String getRace() {
+        return race;
+    }
 
-@JsonProperty("collectionText")
-public String getCollectionText() {
-return collectionText;
-}
+    @JsonProperty("race")
+    public void setRace(String race) {
+        this.race = race;
+    }
 
-@JsonProperty("collectionText")
-public void setCollectionText(String collectionText) {
-this.collectionText = collectionText;
-}
+    @JsonProperty("health")
+    public Integer getHealth() {
+        return health;
+    }
 
-@JsonProperty("artist")
-public String getArtist() {
-return artist;
-}
+    @JsonProperty("health")
+    public void setHealth(Integer health) {
+        this.health = health;
+    }
 
-@JsonProperty("artist")
-public void setArtist(String artist) {
-this.artist = artist;
-}
+    @JsonProperty("attack")
+    public Integer getAttack() {
+        return attack;
+    }
 
-@JsonProperty("attack")
-public Integer getAttack() {
-return attack;
-}
+    @JsonProperty("attack")
+    public void setAttack(Integer attack) {
+        this.attack = attack;
+    }
 
-@JsonProperty("attack")
-public void setAttack(Integer attack) {
-this.attack = attack;
-}
+    @JsonProperty("durability")
+    public Integer getDurability() {
+        return durability;
+    }
 
-@JsonProperty("spellDamage")
-public Integer getSpellDamage() {
-return spellDamage;
-}
+    @JsonProperty("durability")
+    public void setDurability(Integer durability) {
+        this.durability = durability;
+    }
 
-@JsonProperty("spellDamage")
-public void setSpellDamage(Integer spellDamage) {
-this.spellDamage = spellDamage;
-}
+    @JsonProperty("armor")
+    public Integer getArmor() {
+        return armor;
+    }
 
-@JsonProperty("cardClass")
-public String getCardClass() {
-return cardClass;
-}
+    @JsonProperty("armor")
+    public void setArmor(Integer armor) {
+        this.armor = armor;
+    }
 
-@JsonProperty("cardClass")
-public void setCardClass(String cardClass) {
-this.cardClass = cardClass;
-}
+    @JsonProperty("cardSet")
+    public String getCardSet() {
+        return cardSet;
+    }
 
-@JsonProperty("collectible")
-public Boolean getCollectible() {
-return collectible;
-}
+    @JsonProperty("cardSet")
+    public void setCardSet(String cardSet) {
+        this.cardSet = cardSet;
+    }
 
-@JsonProperty("collectible")
-public void setCollectible(Boolean collectible) {
-this.collectible = collectible;
-}
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
 
-@JsonProperty("cost")
-public Integer getCost() {
-return cost;
-}
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
 
-@JsonProperty("cost")
-public void setCost(Integer cost) {
-this.cost = cost;
-}
+    @JsonProperty("faction")
+    public String getFaction() {
+        return faction;
+    }
 
-@JsonProperty("overload")
-public Integer getOverload() {
-return overload;
-}
+    @JsonProperty("faction")
+    public void setFaction(String faction) {
+        this.faction = faction;
+    }
 
-@JsonProperty("overload")
-public void setOverload(Integer overload) {
-this.overload = overload;
-}
+    @JsonProperty("rarity")
+    public String getRarity() {
+        return rarity;
+    }
 
-@JsonProperty("dbfId")
-public Integer getDbfId() {
-return dbfId;
-}
+    @JsonProperty("rarity")
+    public void setRarity(String rarity) {
+        this.rarity = rarity;
+    }
 
-@JsonProperty("dbfId")
-public void setDbfId(Integer dbfId) {
-this.dbfId = dbfId;
-}
+    @JsonProperty("cost")
+    public Integer getCost() {
+        return cost;
+    }
 
-@JsonProperty("durability")
-public Integer getDurability() {
-return durability;
-}
+    @JsonProperty("cost")
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
 
-@JsonProperty("durability")
-public void setDurability(Integer durability) {
-this.durability = durability;
-}
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
 
-@JsonProperty("elite")
-public Boolean getElite() {
-return elite;
-}
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
+    }
 
-@JsonProperty("elite")
-public void setElite(Boolean elite) {
-this.elite = elite;
-}
+    @JsonProperty("flavor")
+    public String getFlavor() {
+        return flavor;
+    }
 
-@JsonProperty("flavor")
-public String getFlavor() {
-return flavor;
-}
+    @JsonProperty("flavor")
+    public void setFlavor(String flavor) {
+        this.flavor = flavor;
+    }
 
-@JsonProperty("flavor")
-public void setFlavor(String flavor) {
-this.flavor = flavor;
-}
+    @JsonProperty("artist")
+    public String getArtist() {
+        return artist;
+    }
 
-@JsonProperty("health")
-public Integer getHealth() {
-return health;
-}
+    @JsonProperty("artist")
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
 
-@JsonProperty("health")
-public void setHealth(Integer health) {
-this.health = health;
-}
+    @JsonProperty("collectible")
+    public Boolean getCollectible() {
+        return collectible;
+    }
 
-@JsonProperty("id")
-public String getId() {
-return id;
-}
+    @JsonProperty("collectible")
+    public void setCollectible(Boolean collectible) {
+        this.collectible = collectible;
+    }
 
-@JsonProperty("id")
-public void setId(String id) {
-this.id = id;
-}
+    @JsonProperty("elite")
+    public Boolean getElite() {
+        return elite;
+    }
 
-@JsonProperty("mechanics")
-public List<String> getMechanics() {
-return mechanics;
-}
+    @JsonProperty("elite")
+    public void setElite(Boolean elite) {
+        this.elite = elite;
+    }
 
-@JsonProperty("mechanics")
-public void setMechanics(List<String> mechanics) {
-this.mechanics = mechanics;
-}
+    @JsonProperty("playerClass")
+    public String getPlayerClass() {
+        return playerClass;
+    }
 
-@JsonProperty("name")
-public String getName() {
-return name;
-}
+    @JsonProperty("playerClass")
+    public void setPlayerClass(String playerClass) {
+        this.playerClass = playerClass;
+    }
 
-@JsonProperty("name")
-public void setName(String name) {
-this.name = name;
-}
+    @JsonProperty("howToGet")
+    public String getHowToGet() {
+        return howToGet;
+    }
 
-@JsonIgnore
-@JsonProperty("playRequirements")
-public PlayRequirements getPlayRequirements() {
-return playRequirements;
-}
+    @JsonProperty("howToGet")
+    public void setHowToGet(String howToGet) {
+        this.howToGet = howToGet;
+    }
 
-@JsonIgnore
-@JsonProperty("playRequirements")
-public void setPlayRequirements(PlayRequirements playRequirements) {
-this.playRequirements = playRequirements;
-}
+    @JsonProperty("howToGetGold")
+    public String getHowToGetGold() {
+        return howToGetGold;
+    }
 
-@JsonProperty("race")
-public String getRace() {
-return race;
-}
+    @JsonProperty("howToGetGold")
+    public void setHowToGetGold(String howToGetGold) {
+        this.howToGetGold = howToGetGold;
+    }
 
-@JsonProperty("race")
-public void setRace(String race) {
-this.race = race;
-}
+    @JsonProperty("img")
+    public String getImg() {
+        return img;
+    }
 
-@JsonProperty("rarity")
-public String getRarity() {
-return rarity;
-}
+    @JsonProperty("img")
+    public void setImg(String img) {
+        this.img = img;
+    }
 
-@JsonProperty("rarity")
-public void setRarity(String rarity) {
-this.rarity = rarity;
-}
+    @JsonProperty("imgGold")
+    public String getImgGold() {
+        return imgGold;
+    }
 
-@JsonProperty("referencedTags")
-public List<String> getReferencedTags() {
-return referencedTags;
-}
+    @JsonProperty("imgGold")
+    public void setImgGold(String imgGold) {
+        this.imgGold = imgGold;
+    }
 
-@JsonProperty("referencedTags")
-public void setReferencedTags(List<String> referencedTags) {
-this.referencedTags = referencedTags;
-}
+    @JsonProperty("locale")
+    public String getLocale() {
+        return locale;
+    }
 
-@JsonProperty("set")
-public String getSet() {
-return set;
-}
+    @JsonProperty("locale")
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
 
-@JsonProperty("set")
-public void setSet(String set) {
-this.set = set;
-}
+    @JsonProperty("mechanics")
+    public List<Mechanic> getMechanics() {
+        return mechanics;
+    }
 
-@JsonProperty("targetingArrowText")
-public String getTargetingArrowText() {
-return targetingArrowText;
-}
-
-@JsonProperty("targetingArrowText")
-public void setTargetingArrowText(String targetingArrowText) {
-this.targetingArrowText = targetingArrowText;
-}
-
-@JsonProperty("text")
-public String getText() {
-return text;
-}
-
-@JsonProperty("text")
-public void setText(String text) {
-this.text = text;
-}
-
-@JsonProperty("type")
-public CardType getType() {
-return type;
-}
-
-@JsonProperty("type")
-public void setType(CardType type) {
-this.type = type;
-}
-
-@Override
-public String toString() {
-return new ToStringBuilder(this).append("artist", artist).append("attack", attack).append("cardClass", cardClass).append("collectible", collectible).append("cost", cost).append("dbfId", dbfId).append("flavor", flavor).append("health", health).append("id", id).append("mechanics", mechanics).append("name", name).append("rarity", rarity).append("set", set).append("text", text).append("type", type).toString();
-}
-
-@Override
-public int hashCode() {
-return new HashCodeBuilder().append(text).append(set).append(rarity).append(flavor).append(type).append(health).append(cost).append(id).append(cardClass).append(name).append(mechanics).append(collectible).append(dbfId).append(attack).append(artist).toHashCode();
-}
-
-@Override
-public boolean equals(Object other) {
-if (other == this) {
-return true;
-}
-if ((other instanceof Card) == false) {
-return false;
-}
-Card rhs = ((Card) other);
-return new EqualsBuilder().append(text, rhs.text).append(set, rhs.set).append(rarity, rhs.rarity).append(flavor, rhs.flavor).append(type, rhs.type).append(health, rhs.health).append(cost, rhs.cost).append(id, rhs.id).append(cardClass, rhs.cardClass).append(name, rhs.name).append(mechanics, rhs.mechanics).append(collectible, rhs.collectible).append(dbfId, rhs.dbfId).append(attack, rhs.attack).append(artist, rhs.artist).isEquals();
-}
+    @JsonProperty("mechanics")
+    public void setMechanics(List<Mechanic> mechanics) {
+        this.mechanics = mechanics;
+    }
 
 }
