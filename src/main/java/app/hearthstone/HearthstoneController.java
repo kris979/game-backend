@@ -1,5 +1,6 @@
 package app.hearthstone;
 
+import app.hearthstone.model.Card;
 import app.hearthstone.model.CardEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -48,6 +49,10 @@ public class HearthstoneController {
         return dbService.getById(id);
     }
 
+    @RequestMapping(value = "/cards/heroes", method = RequestMethod.GET)
+    public List<Card> getHeroes() {
+        return cardService.getHeroes();
+    }
 
     //localhost:8080/swagger-ui.html
 //    http://localhost:8080/v2/api-docs
