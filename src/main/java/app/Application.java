@@ -14,3 +14,8 @@ public class Application {
 	}
 
 }
+
+
+//localhost:8090/swagger-ui.html
+//    http://localhost:8090/v2/api-docs
+//    http://localhost:8090/swagger-ui.html#/

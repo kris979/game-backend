@@ -8,6 +8,6 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 @Configuration
-@Import({ShortestPathConfig.class, ModelConfig.class, SwaggerConfig.class})
+@Import({ModelConfig.class, SwaggerConfig.class})
 public class Config {
 }
