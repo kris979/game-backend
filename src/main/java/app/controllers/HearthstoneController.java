@@ -1,11 +1,13 @@
-package app.hearthstone;
+package app.controllers;
 
-import app.hearthstone.model.CardEntity;
+import app.model.CardEntity;
+import app.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/hearthstone")
@@ -42,7 +44,7 @@ public class HearthstoneController {
     }
 
     @RequestMapping(value = "/cards/{id}", method = RequestMethod.GET)
-    public CardEntity cardsById(@PathVariable("id") Long id) {
+    public CardEntity cardsById(@PathVariable("id") Long id) throws ExecutionException {
         return cardService.getById(id);
     }
 

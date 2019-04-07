@@ -1,11 +1,15 @@
-package app.hearthstone;
+package app.services;
 
-import app.hearthstone.data.DbCardRepository;
-import app.hearthstone.data.JsonFileCardRepository;
-import app.hearthstone.model.Card;
-import app.hearthstone.model.CardEntity;
-import app.hearthstone.model.CardEntityBuilder;
-import app.hearthstone.model.CardType;
+import app.cache.CardCacheLoader;
+import app.cache.CardRemovalListener;
+import app.data.DbCardRepository;
+import app.data.JsonFileCardRepository;
+import app.model.Card;
+import app.model.CardEntity;
+import app.model.CardEntityBuilder;
+import app.model.CardType;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.LoadingCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,17 +20,25 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class CardService {
 
+    private final LoadingCache<Long, CardEntity> cache;
     private JsonFileCardRepository cardsRepository;
     private DbCardRepository databaseRepository;
 
     @Autowired
-    public CardService(JsonFileCardRepository cardsRepository, DbCardRepository databaseRepository) {
+    public CardService(JsonFileCardRepository cardsRepository, DbCardRepository databaseRepository, CardCacheLoader loader, CardRemovalListener listener) {
         this.cardsRepository = cardsRepository;
         this.databaseRepository = databaseRepository;
+        cache = CacheBuilder.newBuilder()
+                .maximumSize(2000)
+                .expireAfterWrite(10, TimeUnit.MINUTES)
+                .removalListener(listener)
+                .build(loader);
     }
 
     @Transactional
@@ -77,12 +89,7 @@ public class CardService {
         return new CardEntityBuilder().withName(name).withRarity(rarity).withHealth(health).withAttack(attack).withCardType(cardType).withRace(race).withCost(cost).withCardClass(cardClass).createCardEntity();
     }
 
-    public CardEntity getById(Long id) throws EntityNotFoundException {
-        Optional<CardEntity> card = this.databaseRepository.findById(id);
-        if (!card.isPresent()) {
-            throw new EntityNotFoundException(String.format("Card with id=%d does not exist. Are you sure you have got correct id?", id));
-        } else {
-            return card.get();
-        }
+    public CardEntity getById(Long id) throws ExecutionException {
+        return cache.get(id);
     }
 }

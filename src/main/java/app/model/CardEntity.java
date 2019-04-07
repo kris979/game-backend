@@ -1,4 +1,4 @@
-package app.hearthstone.model;
+package app.model;
 
 import javax.persistence.*;
 import java.util.Objects;

@@ -1,6 +1,6 @@
-package app.hearthstone.data;
+package app.data;
 
-import app.hearthstone.model.Card;
+import app.model.Card;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

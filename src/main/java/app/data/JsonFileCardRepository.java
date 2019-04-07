@@ -1,17 +1,10 @@
-package app.hearthstone.data;
+package app.data;
 
-import app.hearthstone.model.Card;
-import app.hearthstone.model.CardType;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import app.model.Card;
+import app.model.CardType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

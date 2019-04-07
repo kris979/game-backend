@@ -1,19 +1,14 @@
-package app.hearthstone.data;
+package app.data;
 
-import app.hearthstone.model.CardEntity;
-import app.hearthstone.model.CardType;
+import app.model.CardEntity;
+import app.model.CardType;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.cdi.JpaRepositoryExtension;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.net.ContentHandler;
 import java.util.List;
-import java.util.Optional;
 
 public interface DbCardRepository extends JpaRepository<CardEntity, Long> {
 

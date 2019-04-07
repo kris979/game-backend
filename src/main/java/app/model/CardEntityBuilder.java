@@ -1,4 +1,4 @@
-package app.hearthstone.model;
+package app.model;
 
 public class CardEntityBuilder {
     private String name;
