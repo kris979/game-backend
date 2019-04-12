@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 @Repository
 public class JsonFileCardRepository {
 
-    private List<Card> cards = new ArrayList<>();
+    private final List<Card> cards;
 
     @Autowired
     public JsonFileCardRepository(CardFileReader parser) {

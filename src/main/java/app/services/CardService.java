@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class CardService {
@@ -44,12 +45,8 @@ public class CardService {
     @Transactional
     public void saveAll() {
         List<Card> minions = cardsRepository.getAll();
-        List<CardEntity> converted = new ArrayList<>();
-        for (Card card : minions) {
-            CardEntity entity = convert(card);
-            converted.add(entity);
-        }
-        converted.stream().forEach(card -> databaseRepository.save(card));
+        List<CardEntity> converted = minions.stream().map((card) -> convert(card)).collect(Collectors.toList());
+        databaseRepository.saveAll(converted);
     }
 
     public void deleteAll() {
